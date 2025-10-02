@@ -23,6 +23,16 @@ def test_roman_conversion():
         result = roman_to_int(roman)
         status = "✓" if result == expected else "✗"
         print(f"  {status} {roman} = {result} (expected {expected})")
+    
+    # Test invalid Roman numerals
+    print("\nTesting invalid Roman numerals:")
+    invalid_cases = ["IIII", "VV", "LLLL", "IC", "VL"]
+    for case in invalid_cases:
+        try:
+            result = roman_to_int(case)
+            print(f"  ✗ {case} = {result} (unexpected - should be invalid)")
+        except ValueError as e:
+            print(f"  ✓ {case} -> Error: {str(e)[:50]}...")
 
 def test_written_conversion():
     """Test written number conversion."""
@@ -33,7 +43,8 @@ def test_written_conversion():
         ("ten", 10),
         ("fifteen", 15),
         ("twenty", 20),
-        ("invalid", -1)
+        ("invalid", None),
+        ("negative one", None)
     ]
     
     print("\nTesting written number conversion:")

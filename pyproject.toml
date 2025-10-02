@@ -4,16 +4,16 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "numeric-converter"
-version = "0.1.0"
+version = "0.1.2"
 description = "A Python package for converting Roman numerals and written numbers to integers"
 readme = "README.md"
 requires-python = ">=3.7"
 license = "MIT"
 authors = [
-    {name = "Your Name", email = "your.email@example.com"}
+    {name = "kaushikasemwal", email = "kaushikasemwal@email.com"}
 ]
 maintainers = [
-    {name = "Your Name", email = "your.email@example.com"}
+    {name = "kaushikasemwal", email = "kaushikasemwal@email.com"}
 ]
 keywords = ["roman", "numerals", "numbers", "converter", "text-to-number"]
 classifiers = [

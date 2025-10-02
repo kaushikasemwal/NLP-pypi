@@ -2,12 +2,12 @@ from setuptools import setup, find_packages
 
 setup(
     name="numeric-converter",
-    version="0.1.0",
+    version="0.1.2",
     description="A Python package for converting Roman numerals and written numbers to integers",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
-    author="Your Name",
-    author_email="your.email@example.com",
+    author="kaushikasemwal",
+    author_email="kaushikasemwal@email.com",
     url="https://github.com/yourusername/numeric-converter",
     packages=find_packages(where="src"),
     package_dir={"": "src"},

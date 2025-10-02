@@ -4,8 +4,9 @@ A Python package for converting Roman numerals and written numbers to integers.
 
 ## Features
 
-- **Roman Numeral Conversion**: Convert Roman numerals (I, V, X, L, C, D, M) to integers
+- **Roman Numeral Conversion**: Convert Roman numerals (I, V, X, L, C, D, M) to integers with strict validation
 - **Written Number Conversion**: Convert written numbers ("one", "two", etc.) to integers
+- **Robust Validation**: Prevents invalid Roman numeral patterns (IIII, VV, etc.)
 - **Error Handling**: Proper validation and error messages for invalid inputs
 - **Comprehensive Coverage**: Supports numbers from zero to twenty for written numbers
 
@@ -25,10 +26,17 @@ print(roman_to_int("IV"))        # Output: 4
 print(roman_to_int("IX"))        # Output: 9
 print(roman_to_int("MCMXC"))     # Output: 1990
 
+# Invalid Roman numerals raise ValueError
+try:
+    print(roman_to_int("IIII"))  # Raises ValueError
+except ValueError as e:
+    print(f"Error: {e}")
+
 # Convert written numbers
 print(written_number_to_int("five"))     # Output: 5
 print(written_number_to_int("twenty"))   # Output: 20
-print(written_number_to_int("invalid"))  # Output: -1
+print(written_number_to_int("invalid"))  # Output: None
+print(written_number_to_int("negative one"))  # Output: None
 ```
 
 ## API Reference
@@ -44,7 +52,13 @@ Convert a Roman numeral string to an integer.
 - `int`: The integer value of the Roman numeral
 
 **Raises:**
-- `ValueError`: If the input contains invalid Roman numeral characters
+- `ValueError`: If the input contains invalid Roman numeral patterns
+
+**Validation Rules:**
+- I, X, C can be repeated up to 3 times consecutively
+- V, L, D should never be repeated
+- Only valid subtractive combinations allowed (IV, IX, XL, XC, CD, CM)
+- Invalid patterns like IIII, VV, IC, VL raise ValueError
 
 **Examples:**
 ```python
@@ -54,6 +68,9 @@ Convert a Roman numeral string to an integer.
 58
 >>> roman_to_int('MCMXC')
 1990
+>>> roman_to_int('IIII')  # Invalid pattern
+Traceback (most recent call last):
+ValueError: Invalid repetition in Roman numeral: IIII
 ```
 
 ### `written_number_to_int(s)`
@@ -64,7 +81,7 @@ Convert a written number word to an integer.
 - `s` (str): Written number word (e.g., 'one', 'two', 'ten')
 
 **Returns:**
-- `int`: The integer value of the written number, or -1 if not found
+- `int or None`: The integer value of the written number, or None if not found
 
 **Supported Numbers:**
 - zero through twenty (0-20)
@@ -77,7 +94,9 @@ Convert a written number word to an integer.
 >>> written_number_to_int('FIFTEEN')
 15
 >>> written_number_to_int('invalid')
--1
+None
+>>> written_number_to_int('negative one')
+None
 ```
 
 ## Roman Numeral Rules
@@ -131,6 +150,17 @@ flake8 src/
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Changelog
+
+### v0.1.2
+- **Enhanced**: Added comprehensive Roman numeral validation
+- **Improved**: Prevents invalid patterns like IIII, VV, LLLL according to standard rules
+- **Better**: Validates subtractive combinations (only IV, IX, XL, XC, CD, CM allowed)
+- **Robust**: Raises ValueError for malformed Roman numerals instead of silent errors
+
+### v0.1.1
+- **Improved**: `written_number_to_int()` now returns `None` for invalid inputs instead of `-1`
+- **Better**: Clearer distinction between valid results and invalid inputs
+- **Fixed**: Prevents confusion between negative numbers and invalid inputs
 
 ### v0.1.0
 - Initial release

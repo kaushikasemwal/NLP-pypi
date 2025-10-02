@@ -8,7 +8,7 @@ This package provides simple functions to convert:
 
 from .converter import roman_to_int, written_number_to_int
 
-__version__ = "0.1.0"
+__version__ = "0.1.2"
 __author__ = "Kaushika Semwal"
 __email__ = "semwalkaushika@gmail.com"
 
