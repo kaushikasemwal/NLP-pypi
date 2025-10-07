@@ -9,6 +9,8 @@ A Python package for converting Roman numerals and written numbers to integers.
 - **Robust Validation**: Prevents invalid Roman numeral patterns (IIII, VV, etc.)
 - **Error Handling**: Proper validation and error messages for invalid inputs
 - **Comprehensive Coverage**: Supports numbers from zero to twenty for written numbers
+- **Modern Development**: Fast `uv` workflow and comprehensive `pytest` test suite
+- **100% Test Coverage**: Thoroughly tested with professional test infrastructure
 
 ## Installation
 
@@ -109,16 +111,38 @@ The package follows standard Roman numeral conversion rules:
 
 ## Development
 
-### Setting up for Development
+### Modern Setup (Recommended - using uv)
+
+`uv` is a fast, modern replacement for pip and venv. It's much faster and simpler to use.
+
+```bash
+# Install uv (if not already installed)
+pip install uv
+
+# Create virtual environment
+python -m uv venv
+
+# Activate environment
+source .venv/bin/activate  # On macOS/Linux
+.venv\Scripts\Activate.ps1  # On Windows PowerShell
+
+# Install in development mode with all dependencies
+python -m uv pip install -e ".[dev]"
+```
+
+### Traditional Setup (Alternative)
+
+If you prefer the traditional approach:
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/numeric-converter.git
+git clone https://github.com/kaushikasemwal/numeric-converter.git
 cd numeric-converter
 
 # Create virtual environment
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+python -m venv .venv
+source .venv/bin/activate  # On macOS/Linux
+.venv\Scripts\Activate.ps1  # On Windows PowerShell
 
 # Install in development mode
 pip install -e ".[dev]"
@@ -126,15 +150,49 @@ pip install -e ".[dev]"
 
 ### Running Tests
 
+This project uses `pytest` for testing with comprehensive test coverage.
+
 ```bash
+# Run all tests
 pytest
+
+# Run tests with verbose output
+pytest -v
+
+# Run tests with coverage report
+pytest --cov=src/numeric_converter --cov-report=term-missing
+
+# Run specific test file
+pytest tests/test_roman.py
+
+# Run specific test class
+pytest tests/test_roman.py::TestRomanToInt
+
+# Run specific test method
+pytest tests/test_roman.py::TestRomanToInt::test_valid_roman_numerals
 ```
 
-### Code Formatting
+**Test Structure:**
+```
+tests/
+├── __init__.py              # Test package initialization
+├── conftest.py              # Shared test fixtures and configuration
+├── test_roman.py            # Tests for Roman numeral conversion
+├── test_written.py          # Tests for written number conversion
+└── test_integration.py      # Integration tests for the entire package
+```
+
+### Code Quality
 
 ```bash
+# Format code with black
 black src/
+
+# Lint code with flake8
 flake8 src/
+
+# Type checking with mypy
+mypy src/
 ```
 
 ## Contributing
@@ -150,6 +208,17 @@ flake8 src/
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Changelog
+
+### v0.1.4
+- **Enhanced**: Added comprehensive `pytest` test infrastructure with 100% coverage
+- **Improved**: Professional test structure with `tests/` directory and proper fixtures
+- **Better**: Removed old test files for cleaner project structure
+- **Added**: Detailed testing documentation with multiple test running options
+
+### v0.1.3
+- **Enhanced**: Added modern `uv` workflow support for faster development setup
+- **Improved**: Updated development documentation with both uv and traditional approaches
+- **Better**: Faster dependency installation and environment setup for contributors
 
 ### v0.1.2
 - **Enhanced**: Added comprehensive Roman numeral validation
